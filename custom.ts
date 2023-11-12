@@ -45,7 +45,7 @@ namespace custom {
     export function makeBottomBody(myBlock: halfBlocks) {
         agent.setSlot(1)
         agent.setItem(myBlock, 64, 1);
-        buildingCarBody(myBlock);
+        buildingCarBottom(myBlock);
     }
 
     /**
@@ -58,7 +58,7 @@ namespace custom {
     export function makeBody(myBlock: number) {
         agent.setSlot(1)
         agent.setItem(myBlock, 64, 1);
-        buildingCarBottom(myBlock);
+        buildingCarBody(myBlock);
     }
 
     /**
@@ -70,7 +70,7 @@ namespace custom {
     export function makeUpBody(myBlock: halfBlocks) {
         agent.setSlot(1);
         agent.setItem(myBlock, 64, 1);
-        buildingCarBody(myBlock);
+        buildingCarUp(myBlock);
     }
 
     /**
