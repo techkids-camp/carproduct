@@ -36,6 +36,8 @@ enum halfBlocks {
  */
 //% color=#B40404 weight=400 icon="\uf1b9" block=くるまをつくる
 namespace custom {
+    let checkList: number[] = [];
+
     /**
      * TODO: describe your function here
      * @param value describe value here, eg: 5
@@ -46,6 +48,10 @@ namespace custom {
         agent.setSlot(1)
         agent.setItem(myBlock, 64, 1);
         buildingCarBottom(myBlock);
+
+        checkList.push(1);
+
+        answerCheck();
     }
 
     /**
@@ -59,6 +65,10 @@ namespace custom {
         agent.setSlot(1)
         agent.setItem(myBlock, 64, 1);
         buildingCarBody(myBlock);
+
+        checkList.push(2);
+
+        answerCheck();
     }
 
     /**
@@ -71,6 +81,10 @@ namespace custom {
         agent.setSlot(1);
         agent.setItem(myBlock, 64, 1);
         buildingCarUp(myBlock);
+
+        checkList.push(3);
+
+        answerCheck();
     }
 
     /**
@@ -81,6 +95,10 @@ namespace custom {
     export function makeGlass() {
         agent.setSlot(1);
         buildingCarGlass();
+
+        checkList.push(4);
+
+        answerCheck();
     }
 
     /**
@@ -91,6 +109,10 @@ namespace custom {
     export function makeDoor() {
         agent.setSlot(1);
         buildingCarDoor();
+
+        checkList.push(6);
+
+        answerCheck();
     }
 
     /**
@@ -101,6 +123,10 @@ namespace custom {
     export function makeWheel() {
         agent.setSlot(1);
         buildingCarWheel();
+
+        checkList.push(5);
+
+        answerCheck();
     }
 
     function buildingCarBottom(value: number){
@@ -176,7 +202,6 @@ namespace custom {
         agent.destroy(DOWN)
         agent.move(LEFT, 3)
         agent.destroy(DOWN)
-        
     }
 
     function buildingCarBody(value: number){
@@ -310,5 +335,25 @@ namespace custom {
         agent.place(FORWARD)
         agent.move(LEFT, 2)
         agent.place(FORWARD)
+    }
+
+    function answerCheck(){
+        if(checkList.length !== 6) return;
+
+        const answerList = [1,2,3,4,5,6];
+        
+        for(let i = 0; i < answerList.length; i++){
+            if(answerList[i] !== checkList[i]){
+                // とりあえず仮(本番はダイアログ)
+                player.say("プログラムがちがうよ！");
+                checkList = [];
+                return;
+            }
+        }
+
+        checkList = [];
+
+        // 正解処理
+        player.execute('scoreboard players add "くるまのかず" car 1');
     }
 }
