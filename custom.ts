@@ -471,6 +471,6 @@ namespace custom {
         checkList = [];
 
         // 正解処理
-        player.execute('scoreboard players add "くるまのかず" car 1');
+        player.execute('scoreboard players add @p phase 1');
     }
 }
