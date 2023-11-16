@@ -280,7 +280,7 @@ namespace custom {
         }
         agent.destroy(BACK)
         agent.move(FORWARD, 7)
-        agent.setItem(DIRT, 64, 2)
+        agent.setItem(COARSE_DIRT, 64, 2)
         agent.setSlot(2)
         for (let index = 0; index < 8; index++) {
             for (let index = 0; index < 3; index++) {
