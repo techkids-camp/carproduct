@@ -280,7 +280,7 @@ namespace custom {
         }
         agent.destroy(BACK)
         agent.move(FORWARD, 7)
-        agent.setItem(DIRT, 64, 2)
+        agent.setItem(COARSE_DIRT, 64, 2)
         agent.setSlot(2)
         for (let index = 0; index < 8; index++) {
             for (let index = 0; index < 3; index++) {
@@ -461,8 +461,7 @@ namespace custom {
         
         for(let i = 0; i < answerList.length; i++){
             if(answerList[i] !== checkList[i]){
-                // とりあえず仮(本番はダイアログ)
-                player.say("プログラムがちがうよ！");
+                player.execute("dialogue open @e[type=npc,tag=tutorial,c=1] @a scene_tutorial_CT413");
                 checkList = [];
                 return;
             }
@@ -471,6 +470,6 @@ namespace custom {
         checkList = [];
 
         // 正解処理
-        player.execute('scoreboard players add "くるまのかず" car 1');
+        player.execute('scoreboard players add @p phase 1');
     }
 }
