@@ -82,7 +82,7 @@ namespace road {
             agent.move(FORWARD, 1)
         }
 
-        roadAnswerCheckList.push(2);
+        roadAnswerCheckList.push(3);
         roadAnswerCheck()
     }
     //% blockId=makeMiddlePaint
@@ -96,7 +96,7 @@ namespace road {
             agent.move(FORWARD, 1)
         }
 
-        roadAnswerCheckList.push(2);
+        roadAnswerCheckList.push(4);
         roadAnswerCheck()
     }
     //% blockId=makeroad
@@ -123,10 +123,18 @@ namespace road {
     function roadAnswerCheck() {
         if (roadAnswerCheckList.length !== 4) return;
 
-        const answer = [1, 2, 2, 2];
+        const answer = [1, 2, 3, 4];
 
-        for (let i = 0; answer.length; i++){
-            if (answer[i] !== roadAnswerCheckList[i]) {
+        if (roadAnswerCheckList[0] !== 1){
+            player.say("プログラムがちがうよ！(本番はダイアログ)");
+            roadAnswerCheckList = [];
+            return;
+        }
+
+        const roadAnswerCheckListSorted = roadAnswerCheckList.sort();
+
+        for (let i = 0; i < answer.length; i++){
+            if (answer[i] !== roadAnswerCheckListSorted[i]) {
                 player.say("プログラムがちがうよ！(本番はダイアログ)");
                 roadAnswerCheckList = [];
                 return;
