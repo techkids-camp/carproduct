@@ -461,8 +461,7 @@ namespace custom {
         
         for(let i = 0; i < answerList.length; i++){
             if(answerList[i] !== checkList[i]){
-                // とりあえず仮(本番はダイアログ)
-                player.say("プログラムがちがうよ！");
+                player.execute("dialogue open @e[type=npc,tag=tutorial,c=1] @a scene_tutorial_CT413");
                 checkList = [];
                 return;
             }
