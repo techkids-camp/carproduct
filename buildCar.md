@@ -1,3 +1,7 @@
+### @flyoutOnly true
+### @hideIteration true
+### @hideIteration true
+
 # car-dealer
 
 ## ロボットに車をつくってもらおう！
