@@ -39,6 +39,8 @@ enum paintblocks{
 
 //% color=#696969 weight=400 icon="\uf018" block=みちをつくる
 namespace road {
+    let roadAnswerCheckList: number[] = [];
+
     //% blockId=makeLigthPaint
     //% block="みぎのまんなかのてんせんを $block でつくる"
     //% block.shadow=minecraftBlocks
@@ -57,6 +59,9 @@ namespace road {
             agent.place(DOWN)
             agent.move(FORWARD, 1)
         }
+
+        roadAnswerCheckList.push(2);
+        roadAnswerCheck()
     }
     //% blockId=makeLeftPaint
     //% block="ひだりのまんなかのてんせんを $block でつくる"
@@ -76,6 +81,9 @@ namespace road {
             agent.place(DOWN)
             agent.move(FORWARD, 1)
         }
+
+        roadAnswerCheckList.push(3);
+        roadAnswerCheck()
     }
     //% blockId=makeMiddlePaint
     //% block="まんなかのせんを $block でつくる"
@@ -87,6 +95,9 @@ namespace road {
             agent.place(DOWN)
             agent.move(FORWARD, 1)
         }
+
+        roadAnswerCheckList.push(4);
+        roadAnswerCheck()
     }
     //% blockId=makeroad
     //% block="どうろをいしでつくる"
@@ -95,6 +106,9 @@ namespace road {
         player.execute(
             "/fill -1351 67 -1275 -1430 67 -1261 stone"
         )
+
+        roadAnswerCheckList.push(1);
+        roadAnswerCheck()
     }
     //% blokId=reset
     //% block="さいしょにもどす"
@@ -102,6 +116,35 @@ namespace road {
         player.execute(
             "/fill -1351 67 -1275 -1430 68 -1261 air"
         )
+
+        roadAnswerCheckList = [];
+    }
+
+    function roadAnswerCheck() {
+        if (roadAnswerCheckList.length !== 4) return;
+
+        const answer = [1, 2, 3, 4];
+
+        if (roadAnswerCheckList[0] !== 1){
+            player.say("プログラムがちがうよ！(本番はダイアログ)");
+            roadAnswerCheckList = [];
+            return;
+        }
+
+        const roadAnswerCheckListSorted = roadAnswerCheckList.sort();
+
+        for (let i = 0; i < answer.length; i++){
+            if (answer[i] !== roadAnswerCheckListSorted[i]) {
+                player.say("プログラムがちがうよ！(本番はダイアログ)");
+                roadAnswerCheckList = [];
+                return;
+            }
+        }
+
+        roadAnswerCheckList = [];
+
+        // とりあえず仮(本番はダイアログ)
+        player.say("せいかい！(本番はダイアログ)");
     }
 }
 
