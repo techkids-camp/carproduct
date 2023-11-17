@@ -10,6 +10,7 @@
         "main.ts",
         "README.md",
         "custom.ts",
+        "buildRoad",
         "buildCar.md"
     ],
     "testFiles": [
