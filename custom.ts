@@ -162,6 +162,7 @@ namespace custom {
     //% blockID=makeCircle
     //% block="しゃたい(下)を $myBlock でつくる"
     export function makeBottomBody(myBlock: halfBlocks) {
+        resetArray();
         agentTp();
         agent.setSlot(1)
         agent.setItem(myBlock, 64, 1);
@@ -180,6 +181,7 @@ namespace custom {
     //% block="しゃたいを $myBlock でつくる"
     //% myBlock.shadow=minecraftBlock
     export function makeBody(myBlock: number) {
+        resetArray();
         agentTp();
         agent.setSlot(1)
         agent.setItem(myBlock, 64, 1);
@@ -197,6 +199,7 @@ namespace custom {
     //% blockID=makeCircle
     //% block="しゃたい(上)を $myBlock でつくる"
     export function makeUpBody(myBlock: halfBlocks) {
+        resetArray();
         agentTp();
         agent.setSlot(1);
         agent.setItem(myBlock, 64, 1);
@@ -213,6 +216,7 @@ namespace custom {
     //% blockID=makeCircle
     //% block="まどガラスをつくる"
     export function makeGlass() {
+        resetArray();
         agentTp();
         agent.setSlot(1);
         buildingCarGlass();
@@ -228,6 +232,7 @@ namespace custom {
     //% blockID=makeCircle
     //% block="ドアをつくる"
     export function makeDoor() {
+        resetArray();
         agentTp();
         agent.setSlot(1);
         buildingCarDoor();
@@ -243,6 +248,7 @@ namespace custom {
     //% blockID=makeCircle
     //% block="タイヤをつくる"
     export function makeWheel() {
+        resetArray();
         agentTp();
         agent.setSlot(1);
         buildingCarWheel();
@@ -492,5 +498,9 @@ namespace custom {
         else if(orientation < 135) direction = WEST;
 
         agent.teleport(pos(0, 0, 0), direction);
+    }
+
+    function resetArray() {
+        if (checkList.length === 6) checkList = [];
     }
 }
