@@ -18,3 +18,9 @@ player.onItemInteracted(DIAMOND_AXE, function () {
     custom.makeBottomBody(halfBlocks.SMOOTH_STONE)
 })
 ```
+
+```template
+player.onItemInteracted(DIAMOND_AXE, function () {
+
+})
+```
