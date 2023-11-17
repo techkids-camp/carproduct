@@ -9,8 +9,8 @@
 プログラムをうまくつくったあと、みぎしたの![](https://raw.githubusercontent.com/camp-minecraft/TechkidsCampTutorial/master/images/playbutton.png)をおしたあと、tキーをおしてgoとrunをいれてプログラムをうごかしてみよう！
 
 ```ghost
-player.onChat("run", function () {
-    custom.makeWheel()
+player.onItemInteracted(DIAMOND_AXE, function () {
+	custom.makeWheel()
     custom.makeDoor()
     custom.makeGlass()
     custom.makeUpBody(halfBlocks.SMOOTH_STONE)
