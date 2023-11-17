@@ -30,6 +30,7 @@ enum halfBlocks {
     //% block="たけの木"
     BAMBOO = 912
 }
+
 enum paintblocks{
     //% block="クォーツのハーフブロック"
     STONE_SLAB = 393260
@@ -45,6 +46,7 @@ namespace road {
     export function makeLigthPaint(block:paintblocks){
         agent.teleport(world(-2713, 65, -124), WEST)
         agent.move(FORWARD, 3)
+
         agent.setItem(block, 64, 1)
         for (let index = 0; index < 5; index++) {
             for (let index = 0; index < 5; index++) {
@@ -105,7 +107,7 @@ namespace road {
     }
     //% blokId=reset
     //% block="さいしょにもどす"
-    export function reset(){
+    export function reset() {
         player.execute(
             "/fill -2713 64 -135 -2763 68 -121 air"
         )
@@ -118,7 +120,7 @@ namespace road {
 
         const answer = [1, 2, 3, 4];
 
-        if (roadAnswerCheckList[0] !== 1){
+        if (roadAnswerCheckList[0] !== 1) {
             player.say("プログラムがちがうよ！(本番はダイアログ)");
             roadAnswerCheckList = [];
             return;
@@ -126,7 +128,7 @@ namespace road {
 
         const roadAnswerCheckListSorted = roadAnswerCheckList.sort();
 
-        for (let i = 0; i < answer.length; i++){
+        for (let i = 0; i < answer.length; i++) {
             if (answer[i] !== roadAnswerCheckListSorted[i]) {
                 player.say("プログラムがちがうよ！(本番はダイアログ)");
                 roadAnswerCheckList = [];
@@ -155,6 +157,8 @@ namespace custom {
     //% blockID=makeCircle
     //% block="しゃたい(下)を $myBlock でつくる"
     export function makeBottomBody(myBlock: halfBlocks) {
+        resetArray();
+        agentTp();
         agent.setSlot(1)
         agent.setItem(myBlock, 64, 1);
         buildingCarBottom(myBlock);
@@ -172,6 +176,8 @@ namespace custom {
     //% block="しゃたいを $myBlock でつくる"
     //% myBlock.shadow=minecraftBlock
     export function makeBody(myBlock: number) {
+        resetArray();
+        agentTp();
         agent.setSlot(1)
         agent.setItem(myBlock, 64, 1);
         buildingCarBody(myBlock);
@@ -188,6 +194,8 @@ namespace custom {
     //% blockID=makeCircle
     //% block="しゃたい(上)を $myBlock でつくる"
     export function makeUpBody(myBlock: halfBlocks) {
+        resetArray();
+        agentTp();
         agent.setSlot(1);
         agent.setItem(myBlock, 64, 1);
         buildingCarUp(myBlock);
@@ -203,6 +211,8 @@ namespace custom {
     //% blockID=makeCircle
     //% block="まどガラスをつくる"
     export function makeGlass() {
+        resetArray();
+        agentTp();
         agent.setSlot(1);
         buildingCarGlass();
 
@@ -217,6 +227,8 @@ namespace custom {
     //% blockID=makeCircle
     //% block="ドアをつくる"
     export function makeDoor() {
+        resetArray();
+        agentTp();
         agent.setSlot(1);
         buildingCarDoor();
 
@@ -231,6 +243,8 @@ namespace custom {
     //% blockID=makeCircle
     //% block="タイヤをつくる"
     export function makeWheel() {
+        resetArray();
+        agentTp();
         agent.setSlot(1);
         buildingCarWheel();
 
@@ -239,7 +253,7 @@ namespace custom {
         answerCheck();
     }
 
-    function buildingCarBottom(value: number){
+    function buildingCarBottom(value: number) {
         agent.setItem(STONE, 64, 2)
         for (let index = 0; index < 9; index++) {
             for (let index = 0; index < 4; index++) {
@@ -273,7 +287,7 @@ namespace custom {
         }
         agent.destroy(BACK)
         agent.move(FORWARD, 7)
-        agent.setItem(DIRT, 64, 2)
+        agent.setItem(COARSE_DIRT, 64, 2)
         agent.setSlot(2)
         for (let index = 0; index < 8; index++) {
             for (let index = 0; index < 3; index++) {
@@ -314,7 +328,7 @@ namespace custom {
         agent.destroy(DOWN)
     }
 
-    function buildingCarBody(value: number){
+    function buildingCarBody(value: number) {
         const ableBuild: number[][][] = [
             [
                 [1, 1, 1, 1],
@@ -353,10 +367,10 @@ namespace custom {
         })
     }
 
-    function buildingCarUp(value: halfBlocks){
+    function buildingCarUp(value: halfBlocks) {
         agent.move(BACK, 2);
-        for(let i = 0; i < 6; i++){
-            for (let j = 0; j < 4; j++){
+        for (let i = 0; i < 6; i++) {
+            for (let j = 0; j < 4; j++) {
                 agent.place(FORWARD);
                 agent.move(RIGHT, 1);
             }
@@ -395,7 +409,7 @@ namespace custom {
         agent.place(FORWARD);
     }
 
-    function buildingCarGlass(){
+    function buildingCarGlass() {
         agent.setItem(GLASS, 64, 1)
         agent.move(LEFT, 1)
         agent.move(UP, 1)
@@ -415,7 +429,7 @@ namespace custom {
         agent.place(LEFT)
     }
 
-    function buildingCarWheel(){
+    function buildingCarWheel() {
         agent.setItem(BLACK_CONCRETE, 64, 1)
         agent.move(DOWN, 2)
         agent.place(LEFT)
@@ -429,7 +443,7 @@ namespace custom {
         agent.place(RIGHT)
     }
 
-    function buildingCarDoor(){
+    function buildingCarDoor() {
         agent.setItem(IRON_DOOR, 64, 1)
         agent.move(FORWARD, 2)
         agent.move(UP, 1)
@@ -447,15 +461,14 @@ namespace custom {
         agent.place(FORWARD)
     }
 
-    function answerCheck(){
-        if(checkList.length !== 6) return;
+    function answerCheck() {
+        if (checkList.length !== 6) return;
 
-        const answerList = [1,2,3,4,5,6];
-        
-        for(let i = 0; i < answerList.length; i++){
-            if(answerList[i] !== checkList[i]){
-                // とりあえず仮(本番はダイアログ)
-                player.say("プログラムがちがうよ！");
+        const answerList = [1, 2, 3, 4, 5, 6];
+
+        for (let i = 0; i < answerList.length; i++) {
+            if (answerList[i] !== checkList[i]) {
+                player.execute("dialogue open @e[type=npc,tag=tutorial,c=1] @a scene_tutorial_CT413");
                 checkList = [];
                 return;
             }
@@ -464,6 +477,25 @@ namespace custom {
         checkList = [];
 
         // 正解処理
-        player.execute('scoreboard players add "くるまのかず" car 1');
+        player.execute('scoreboard players add @p phase 1');
+    }
+
+    function agentTp(){
+        if(checkList.length !== 0) return;
+
+        const orientation = player.getOrientation();
+
+        let direction: number = NORTH;
+
+        if(orientation < -135 || orientation > 135) direction = NORTH;
+        else if(orientation < -45) direction = EAST;
+        else if(orientation < 45) direction = SOUTH;
+        else if(orientation < 135) direction = WEST;
+
+        agent.teleport(pos(0, 0, 0), direction);
+    }
+
+    function resetArray() {
+        if (checkList.length === 6) checkList = [];
     }
 }
