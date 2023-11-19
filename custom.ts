@@ -135,7 +135,7 @@ namespace road {
 
         for (let i = 0; i < answer.length; i++) {
             if (answer[i] !== roadAnswerCheckListSorted[i]) {
-                player.say("プログラムがちがうよ！(本番はダイアログ)");
+                player.runChatCommand("dialogue open @e[type=npc,tag=tutorial,c=1] @a scene_tutorial_CT34")
                 roadAnswerCheckList = [];
                 return;
             }
@@ -144,7 +144,7 @@ namespace road {
         roadAnswerCheckList = [];
 
         // とりあえず仮(本番はダイアログ)
-        player.say("せいかい！(本番はダイアログ)");
+        player.runChatCommand("function tutorial/chapter3/exit")
     }
 }
 
