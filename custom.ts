@@ -121,7 +121,7 @@ namespace road {
         const answer = [1, 2, 3, 4];
 
         if (roadAnswerCheckList[0] !== 1) {
-            player.say("プログラムがちがうよ！(本番はダイアログ)");
+            player.execute("dialogue open @e[type=npc,tag=tutorial,c=1] @a scene_tutorial_CT34");
             roadAnswerCheckList = [];
             return;
         }
@@ -130,7 +130,7 @@ namespace road {
 
         for (let i = 0; i < answer.length; i++) {
             if (answer[i] !== roadAnswerCheckListSorted[i]) {
-                player.runChatCommand("dialogue open @e[type=npc,tag=tutorial,c=1] @a scene_tutorial_CT34")
+                player.execute("dialogue open @e[type=npc,tag=tutorial,c=1] @a scene_tutorial_CT34");
                 roadAnswerCheckList = [];
                 return;
             }
@@ -139,7 +139,7 @@ namespace road {
         roadAnswerCheckList = [];
 
         // とりあえず仮(本番はダイアログ)
-        player.runChatCommand("function tutorial/chapter3/exit")
+        player.execute("function tutorial/chapter3/exit");
     }
 }
 
