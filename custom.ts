@@ -31,23 +31,18 @@ enum halfBlocks {
     BAMBOO = 912
 }
 
-enum paintblocks{
-    //% block="クォーツのハーフブロック"
-    STONE_SLAB = 393260
-}
-
 //% color=#696969 weight=400 icon="\uf018" block=みちをつくる
 namespace road {
     let roadAnswerCheckList: number[] = [];
 
     //% blockId=makeLigthPaint
-    //% block="みぎのまんなかのてんせんを $block でつくる"
+    //% block="みぎのてんせんをつくる"
     //% block.shadow=minecraftBlocks
-    export function makeLigthPaint(block:paintblocks){
+    export function makeLigthPaint(){
         agent.teleport(world(-2713, 65, -124), WEST)
         agent.move(FORWARD, 3)
 
-        agent.setItem(block, 64, 1)
+        agent.setItem(QUARTZ_SLAB, 64, 1)
         for (let index = 0; index < 5; index++) {
             for (let index = 0; index < 5; index++) {
                 agent.destroy(DOWN)
@@ -61,12 +56,12 @@ namespace road {
         roadAnswerCheck()
     }
     //% blockId=makeLeftPaint
-    //% block="ひだりのまんなかのてんせんを $block でつくる"
+    //% block="ひだりのてんせんをつくる"
     //% block.shadow=minecraftBlocks
-    export function makeLeftPaint(block:paintblocks){
+    export function makeLeftPaint(){
         agent.teleport(world(-2713, 65, -132), WEST)
         agent.move(FORWARD, 3)
-        agent.setItem(block, 64, 1)
+        agent.setItem(QUARTZ_SLAB, 64, 1)
         for (let index = 0; index < 5; index++) {
             for (let index = 0; index < 5; index++) {
                 agent.destroy(DOWN)
@@ -80,11 +75,11 @@ namespace road {
         roadAnswerCheck()
     }
     //% blockId=makeMiddlePaint
-    //% block="まんなかのせんを $block でつくる"
+    //% block="まんなかのせんをつくる"
     //% block.shadow=minecraftBlocks
-    export function makeMiddlePaint(block: paintblocks) {
+    export function makeMiddlePaint() {
         agent.teleport(world(-2713, 65, -128), WEST)
-        agent.setItem(block, 64, 1)
+        agent.setItem(QUARTZ_SLAB, 64, 1)
         for (let index = 0; index < 51; index++) {
             agent.destroy(DOWN)
             agent.place(DOWN)
