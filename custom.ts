@@ -30,11 +30,10 @@ enum halfBlocks {
     //% block="たけの木"
     BAMBOO = 912
 }
-enum paintblocks {
-    //% block="きいろのカーペット"
-    YELLOW_CARPET = 262315,
-    //% block="しろのカーペット"
-    WHITE_CARPET = 171
+
+enum paintblocks{
+    //% block="クォーツのハーフブロック"
+    STONE_SLAB = 393260
 }
 
 //% color=#696969 weight=400 icon="\uf018" block=みちをつくる
@@ -44,20 +43,18 @@ namespace road {
     //% blockId=makeLigthPaint
     //% block="みぎのまんなかのてんせんを $block でつくる"
     //% block.shadow=minecraftBlocks
-    export function makeLigthPaint(block: paintblocks) {
-        agent.teleport(world(-1350, 69, -1264), WEST)
-        agent.move(FORWARD, 5)
+    export function makeLigthPaint(block:paintblocks){
+        agent.teleport(world(-2713, 65, -124), WEST)
+        agent.move(FORWARD, 3)
+
         agent.setItem(block, 64, 1)
-        for (let index = 0; index < 7; index++) {
+        for (let index = 0; index < 5; index++) {
             for (let index = 0; index < 5; index++) {
+                agent.destroy(DOWN)
                 agent.place(DOWN)
                 agent.move(FORWARD, 1)
             }
             agent.move(FORWARD, 5)
-        }
-        for (let index = 0; index < 5; index++) {
-            agent.place(DOWN)
-            agent.move(FORWARD, 1)
         }
 
         roadAnswerCheckList.push(2);
@@ -66,20 +63,17 @@ namespace road {
     //% blockId=makeLeftPaint
     //% block="ひだりのまんなかのてんせんを $block でつくる"
     //% block.shadow=minecraftBlocks
-    export function makeLeftPaint(block: paintblocks) {
-        agent.teleport(world(-1350, 69, -1272), WEST)
-        agent.move(FORWARD, 5)
+    export function makeLeftPaint(block:paintblocks){
+        agent.teleport(world(-2713, 65, -132), WEST)
+        agent.move(FORWARD, 3)
         agent.setItem(block, 64, 1)
-        for (let index = 0; index < 7; index++) {
+        for (let index = 0; index < 5; index++) {
             for (let index = 0; index < 5; index++) {
+                agent.destroy(DOWN)
                 agent.place(DOWN)
                 agent.move(FORWARD, 1)
             }
             agent.move(FORWARD, 5)
-        }
-        for (let index = 0; index < 5; index++) {
-            agent.place(DOWN)
-            agent.move(FORWARD, 1)
         }
 
         roadAnswerCheckList.push(3);
@@ -89,9 +83,10 @@ namespace road {
     //% block="まんなかのせんを $block でつくる"
     //% block.shadow=minecraftBlocks
     export function makeMiddlePaint(block: paintblocks) {
-        agent.teleport(world(-1351, 69, -1268), WEST)
+        agent.teleport(world(-2713, 65, -128), WEST)
         agent.setItem(block, 64, 1)
-        for (let index = 0; index < 80; index++) {
+        for (let index = 0; index < 51; index++) {
+            agent.destroy(DOWN)
             agent.place(DOWN)
             agent.move(FORWARD, 1)
         }
@@ -104,7 +99,7 @@ namespace road {
     //% block.shadow=minecraftBlock
     export function makeroad() {
         player.execute(
-            "/fill -1351 67 -1275 -1430 67 -1261 stone"
+            "/fill -2713 64 -135 -2763 64 -121 stone_block_slab4 2"
         )
 
         roadAnswerCheckList.push(1);
@@ -114,7 +109,7 @@ namespace road {
     //% block="さいしょにもどす"
     export function reset() {
         player.execute(
-            "/fill -1351 67 -1275 -1430 68 -1261 air"
+            "/fill -2713 64 -135 -2763 68 -121 air"
         )
 
         roadAnswerCheckList = [];
