@@ -488,6 +488,7 @@ namespace custom {
         else if(orientation < 135) direction = WEST;
 
         agent.teleport(pos(0, 0, 0), direction);
+        agent.move(FORWARD, 2);
     }
 
     function resetArray() {
