@@ -12,9 +12,9 @@
 player.onItemInteracted(DIAMOND_AXE, function () {
 	road.makeroad()
     road.reset()
-    road.makeLeftPaint(paintblocks.YELLOW_CARPET)
-    road.makeLigthPaint(paintblocks.YELLOW_CARPET)
-    road.makeMiddlePaint(paintblocks.YELLOW_CARPET)
+    road.makeLeftPaint()
+    road.makeLigthPaint()
+    road.makeMiddlePaint()
 })
 ```
 
