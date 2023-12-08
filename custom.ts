@@ -249,7 +249,31 @@ namespace custom {
     }
 
     function buildingCarBottom(value: number) {
+        const agentDirection = agent.getOrientation();
+        const agentDirectionXYZ = CarUtil.getAgentDirection();
 
+        let structureDirection = 0;
+
+        switch(agentDirection){
+            case -180:
+                agentDirectionXYZ.z -= 9;
+                structureDirection = 90;
+                break;
+            case -90:
+                agentDirectionXYZ.x += 1;
+                structureDirection = 180;
+                break
+            case 90:
+                agentDirectionXYZ.x -= 9;
+                structureDirection = 0;
+                break;
+            case 0:
+                agentDirectionXYZ.z += 1;
+                structureDirection = 270;
+                break;
+        }
+
+        player.execute(`structure load car_bottom ${agentDirectionXYZ.x} ${agentDirectionXYZ.y} ${agentDirectionXYZ.z} ${structureDirection}_degrees`)
     }
 
     function buildingCarBody(value: number) {
@@ -321,6 +345,9 @@ namespace custom {
 }
 
 class CarUtil{
+    /**
+     * プレイヤーの向いている方向を4方向で取得
+     */
     public static getPlayerDirection(): CompassDirection{
         const orientation = player.getOrientation();
 
@@ -332,5 +359,17 @@ class CarUtil{
         return NORTH;
     }
 
+    /**
+     * エージェントの向いている座標をx,y,zそれぞれで取得
+     */
+    public static getAgentDirection(): {x: number, y: number, z: number} {
+        const agentDirection = agent.getPosition()
+        const agentDirectionString = agentDirection.toString().split(" ");
+        const agentDirectionXYZ = agentDirectionString.map(dir => {
+            return parseInt(dir, 10);
+        });
+
+        return {x: agentDirectionXYZ[0], y: agentDirectionXYZ[1], z: agentDirectionXYZ[2]};
+    }
 
 }
