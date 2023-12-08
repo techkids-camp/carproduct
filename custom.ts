@@ -249,211 +249,30 @@ namespace custom {
     }
 
     function buildingCarBottom(value: number) {
-        agent.setItem(STONE, 64, 2)
-        for (let index = 0; index < 9; index++) {
-            for (let index = 0; index < 4; index++) {
-                agent.destroy(DOWN)
-                agent.move(RIGHT, 1)
-            }
-            agent.move(FORWARD, 1)
-            agent.move(LEFT, 4)
-        }
-        agent.move(BACK, 1)
-        agent.move(DOWN, 1)
-        agent.move(LEFT, 4)
-        for (let index = 0; index < 9; index++) {
-            for (let index = 0; index < 3; index++) {
-                agent.move(UP, 1)
-                agent.setSlot(2)
-                agent.place(UP)
-                agent.move(DOWN, 1)
-                agent.setSlot(1)
-                agent.place(UP)
-                agent.move(RIGHT, 1)
-            }
-            agent.move(UP, 1)
-            agent.setSlot(2)
-            agent.place(UP)
-            agent.move(DOWN, 1)
-            agent.setSlot(1)
-            agent.place(UP)
-            agent.move(BACK, 1)
-            agent.move(LEFT, 3)
-        }
-        agent.destroy(BACK)
-        agent.move(FORWARD, 7)
-        agent.setItem(COARSE_DIRT, 64, 2)
-        agent.setSlot(2)
-        for (let index = 0; index < 8; index++) {
-            for (let index = 0; index < 3; index++) {
-                agent.place(FORWARD)
-                agent.move(RIGHT, 1)
-            }
-            agent.place(FORWARD)
-            agent.move(BACK, 1)
-            agent.move(LEFT, 3)
-        }
-        agent.move(RIGHT, 2)
-        agent.place(RIGHT)
-        agent.move(LEFT, 1)
-        agent.place(RIGHT)
-        agent.move(LEFT, 1)
-        agent.place(RIGHT)
-        agent.move(BACK, 1)
-        agent.place(FORWARD)
-        agent.move(UP, 1)
-        agent.place(DOWN)
-        agent.move(UP, 1)
-        for (let index = 0; index < 9; index++) {
-            for (let index = 0; index < 3; index++) {
-                agent.destroy(FORWARD)
-                agent.move(RIGHT, 1)
-            }
-            agent.destroy(FORWARD)
-            agent.move(FORWARD, 1)
-            agent.move(LEFT, 3)
-        }
-        agent.move(BACK, 1)
-        agent.destroy(DOWN)
-        agent.move(RIGHT, 3)
-        agent.destroy(DOWN)
-        agent.move(BACK, 6)
-        agent.destroy(DOWN)
-        agent.move(LEFT, 3)
-        agent.destroy(DOWN)
+
     }
 
     function buildingCarBody(value: number) {
-        const ableBuild: number[][][] = [
-            [
-                [1, 1, 1, 1],
-                [1, 0, 0, 1],
-                [1, 0, 0, 1],
-                [0, 0, 0, 0],
-                [1, 0, 0, 1],
-                [0, 0, 0, 0],
-                [1, 0, 0, 1],
-                [1, 1, 1, 1],
-                [1, 1, 1, 1],
-            ],
-            [
-                [1, 0, 0, 1],
-                [0, 0, 0, 0],
-                [1, 0, 0, 1],
-                [0, 0, 0, 0],
-                [1, 0, 0, 1],
-                [0, 0, 0, 0],
-                [1, 0, 0, 1],
-            ]
-        ]
 
-        agent.move(FORWARD, 6);
-        ableBuild.forEach((oneL, i) => {
-            oneL.forEach((oneL2, j) => {
-                oneL2.forEach((one, k) => {
-                    if (one === 1) agent.place(FORWARD);
-                    agent.move(RIGHT, 1);
-                })
-                agent.move(BACK, 1);
-                agent.move(LEFT, 4);
-            });
-            agent.move(UP, 1);
-            agent.move(FORWARD, 9);
-        })
     }
 
     function buildingCarUp(value: halfBlocks) {
-        agent.move(BACK, 2);
-        for (let i = 0; i < 6; i++) {
-            for (let j = 0; j < 4; j++) {
-                agent.place(FORWARD);
-                agent.move(RIGHT, 1);
-            }
-            agent.move(BACK, 1);
-            agent.move(LEFT, 4);
-        }
 
-        agent.move(BACK, 2);
-        agent.move(DOWN, 2);
-
-        agent.setItem(FRAME, 64, 2)
-        agent.setItem(LADDER, 64, 3)
-
-        agent.setSlot(2);
-        agent.place(FORWARD);
-
-        agent.setSlot(3);
-        agent.move(RIGHT, 1);
-        agent.place(FORWARD);
-        agent.move(RIGHT, 1);
-        agent.place(FORWARD);
-        agent.move(RIGHT, 1);
-
-        agent.setSlot(2);
-        agent.place(FORWARD);
-
-        agent.move(UP, 3);
-
-        agent.move(FORWARD, 10);
-        agent.turn(LEFT);
-        agent.turn(LEFT);
-        agent.move(DOWN, 3);
-
-        agent.place(FORWARD);
-        agent.move(RIGHT, 3);
-        agent.place(FORWARD);
     }
 
     function buildingCarGlass() {
         agent.setItem(GLASS, 64, 1)
-        agent.move(LEFT, 1)
-        agent.move(UP, 1)
-        agent.place(FORWARD)
-        agent.move(LEFT, 1)
-        agent.place(FORWARD)
-        agent.move(LEFT, 2)
-        agent.move(FORWARD, 2)
-        agent.place(RIGHT)
-        agent.move(FORWARD, 6)
-        agent.move(RIGHT, 2)
-        agent.place(BACK)
-        agent.move(RIGHT, 1)
-        agent.place(BACK)
-        agent.move(RIGHT, 2)
-        agent.move(BACK, 6)
-        agent.place(LEFT)
+
     }
 
     function buildingCarWheel() {
         agent.setItem(BLACK_CONCRETE, 64, 1)
-        agent.move(DOWN, 2)
-        agent.place(LEFT)
-        agent.move(FORWARD, 6)
-        agent.place(LEFT)
-        agent.move(UP, 2)
-        agent.move(LEFT, 5)
-        agent.move(DOWN, 2)
-        agent.place(RIGHT)
-        agent.move(BACK, 6)
-        agent.place(RIGHT)
+
     }
 
     function buildingCarDoor() {
         agent.setItem(IRON_DOOR, 64, 1)
-        agent.move(FORWARD, 2)
-        agent.move(UP, 1)
-        agent.turn(RIGHT_TURN)
-        agent.place(FORWARD)
-        agent.move(LEFT, 2)
-        agent.place(FORWARD)
-        agent.move(UP, 3)
-        agent.move(FORWARD, 5)
-        agent.move(DOWN, 3)
-        agent.turn(RIGHT_TURN)
-        agent.turn(RIGHT_TURN)
-        agent.place(FORWARD)
-        agent.move(LEFT, 2)
-        agent.place(FORWARD)
+
     }
 
     function answerCheck() {
@@ -478,20 +297,36 @@ namespace custom {
     function agentTp(){
         if(checkList.length !== 0) return;
 
-        const orientation = player.getOrientation();
+        const agentDirection = CarUtil.getPlayerDirection();
 
-        let direction: number = NORTH;
-
-        if(orientation < -135 || orientation > 135) direction = NORTH;
-        else if(orientation < -45) direction = EAST;
-        else if(orientation < 45) direction = SOUTH;
-        else if(orientation < 135) direction = WEST;
-
-        agent.teleport(pos(0, 0, 0), direction);
-        agent.move(FORWARD, 2);
+        switch(agentDirection){
+            case NORTH:
+                agent.teleport(pos(0, 0, -2), agentDirection);
+            case SOUTH:
+                agent.teleport(pos(0, 0, 2), agentDirection);
+            case EAST:
+                agent.teleport(pos(2, 0, 0), agentDirection);
+            case WEST:
+                agent.teleport(pos(-2, 0, 0), agentDirection);
+        }
     }
 
     function resetArray() {
         if (checkList.length === 6) checkList = [];
     }
+}
+
+class CarUtil{
+    public static getPlayerDirection(): CompassDirection{
+        const orientation = player.getOrientation();
+
+        if (orientation < -135 || orientation > 135) return NORTH;
+        else if (orientation < -45) return EAST;
+        else if (orientation < 45) return SOUTH;
+        else if (orientation < 135) return WEST;
+
+        return NORTH;
+    }
+
+
 }
