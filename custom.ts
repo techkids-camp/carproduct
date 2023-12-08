@@ -302,12 +302,16 @@ namespace custom {
         switch(agentDirection){
             case NORTH:
                 agent.teleport(pos(0, 0, -2), agentDirection);
+                break;
             case SOUTH:
                 agent.teleport(pos(0, 0, 2), agentDirection);
+                break;
             case EAST:
                 agent.teleport(pos(2, 0, 0), agentDirection);
+                break;
             case WEST:
                 agent.teleport(pos(-2, 0, 0), agentDirection);
+                break;
         }
     }
 
