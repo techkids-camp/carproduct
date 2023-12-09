@@ -11,7 +11,8 @@
         "README.md",
         "custom.ts",
         "buildCar.md",
-        "buildRoad.md"
+        "buildRoad.md",
+        "stone.jres"
     ],
     "testFiles": [
         "test.ts"
