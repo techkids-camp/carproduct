@@ -12,7 +12,7 @@
         "custom.ts",
         "buildCar.md",
         "buildRoad.md",
-        "stone.jres"
+        "Stone.jres"
     ],
     "testFiles": [
         "test.ts"
