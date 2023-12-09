@@ -414,7 +414,7 @@ class CarUtil{
 
         const agentDirection = agent.getOrientation();
 
-        const endPos: Coord = {x: 0, y: 0, z: 0};
+        const endPos: Coord = {x: 0, y: height - 1, z: 0};
 
         switch(agentDirection){
             case -180:
