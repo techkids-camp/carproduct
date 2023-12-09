@@ -293,6 +293,24 @@ namespace custom {
         const { structurePos, structureDirection } = CarUtil.getWillLoadStructureData();
 
         player.execute(`structure load car_middle ${structurePos.x} ${structurePos.y} ${structurePos.z} ${structureDirection}_degrees`);
+
+        agent.move(FORWARD, 1);
+
+        const carCoord = CarUtil.getCarCoord(2);
+
+        const startX = carCoord.startPos.x;
+        const startY = carCoord.startPos.y;
+        const startZ = carCoord.startPos.z;
+
+        const endX = carCoord.endPos.x;
+        const endY = carCoord.endPos.y;
+        const endZ = carCoord.endPos.z;
+        blocks.replace(
+            value,
+            STONE,
+            world(startX, startY, startZ),
+            world(endX, endY, endZ)
+        );
     }
 
     function buildingCarUp(value: halfBlocks) {
@@ -414,7 +432,7 @@ class CarUtil{
 
         const agentDirection = agent.getOrientation();
 
-        const endPos: Coord = {x: 0, y: height - 1, z: 0};
+        const endPos: Coord = {x: 0, y: startPos.y + height - 1 , z: 0};
 
         switch(agentDirection){
             case -180:
