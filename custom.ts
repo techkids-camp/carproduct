@@ -253,7 +253,7 @@ namespace custom {
         const agentDirectionXYZ = CarUtil.getAgentDirection();
 
         let structureDirection = 0;
-
+        // -180と-90は左寄り
         switch(agentDirection){
             case -180:
                 agentDirectionXYZ.z -= 9;
@@ -273,7 +273,10 @@ namespace custom {
                 break;
         }
 
-        player.execute(`structure load car_bottom ${agentDirectionXYZ.x} ${agentDirectionXYZ.y} ${agentDirectionXYZ.z} ${structureDirection}_degrees`)
+        player.execute(`structure load car_bottom ${agentDirectionXYZ.x} ${agentDirectionXYZ.y} ${agentDirectionXYZ.z} ${structureDirection}_degrees`);
+
+        const carCoord = CarUtil.getCarCoord(1);
+
     }
 
     function buildingCarBody(value: number) {
@@ -344,6 +347,17 @@ namespace custom {
     }
 }
 
+type Coord = {
+    x: number,
+    y: number,
+    z: number
+}
+
+type CoordRange = {
+    startPos: Coord,
+    endPos: Coord
+}
+
 class CarUtil{
     /**
      * プレイヤーの向いている方向を4方向で取得
@@ -362,7 +376,7 @@ class CarUtil{
     /**
      * エージェントの向いている座標をx,y,zそれぞれで取得
      */
-    public static getAgentDirection(): {x: number, y: number, z: number} {
+    public static getAgentDirection(): Coord {
         const agentDirection = agent.getPosition()
         const agentDirectionString = agentDirection.toString().split(" ");
         const agentDirectionXYZ = agentDirectionString.map(dir => {
@@ -372,4 +386,128 @@ class CarUtil{
         return {x: agentDirectionXYZ[0], y: agentDirectionXYZ[1], z: agentDirectionXYZ[2]};
     }
 
+    /**
+     * 車の範囲を取得する
+     * @param height 高さをどこまでとるか
+     */
+    public static getCarCoord(height: number): CoordRange {
+        const startPos: Coord = this.getAgentDirection();
+
+        const agentDirection = agent.getOrientation();
+
+        const endPos: Coord = {x: 0, y: 0, z: 0};
+
+        switch(agentDirection){
+            case -180:
+                endPos.x = startPos.x + 3;
+                endPos.z = startPos.z - 9;
+                break;
+            case -90:
+                endPos.x = startPos.x + 9;
+                endPos.z = startPos.z + 3;
+                break;
+            case 90:
+                endPos.x = startPos.x - 9;
+                endPos.z = startPos.z + 3;
+                break;
+            case 0:
+                endPos.x = startPos.x + 3;
+                endPos.z = startPos.z + 9;
+                break;
+        }
+
+        return {
+            startPos: startPos,
+            endPos: endPos
+        };
+    }
+
+    /**
+     * コマンドで用いられるハーフブロックの名前を返す
+     * @param block ブロック
+     * @returns コマンド使われるそのブロックの文字列
+     */
+    public static getCommandHalfBlock(block: Block): string {
+
+
+        switch(block){
+            case DOUBLE_STONE_SLAB:
+            case SMOOTH_STONE_SLAB:
+            case STONE_SLAB:
+                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="smooth_stone"]`;
+
+            case SANDSTONE_SLAB:
+                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="sandstone"]`;
+
+            case COBBLESTONE_SLAB:
+                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="cobblestone"]`;
+
+            case BRICKS_SLAB:
+                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="brick"]`;
+
+            case STONE_BRICKS_SLAB:
+                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="stone_brick"]`;
+
+            case QUARTZ_SLAB:
+                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="quartz"]`;
+
+            case NETHER_BRICK_SLAB:
+                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="nether_brick"]`;
+
+            case DOUBLE_WOODEN_SLAB:
+            case OAK_WOOD_SLAB:
+                return `wooden_slab ["top_slot_bit"=true,"wood_type"="oak"]`;
+
+            case SPRUCE_WOOD_SLAB:
+                return `wooden_slab ["top_slot_bit"=true,"wood_type"="spruce"]`;
+
+            case BIRCH_WOOD_SLAB:
+                return `wooden_slab ["top_slot_bit"=true,"wood_type"="birch"]`;
+
+            case JUNGLE_WOOD_SLAB:
+                return `wooden_slab ["top_slot_bit"=true,"wood_type"="jungle"]`;
+
+            case ACACIA_WOOD_SLAB:
+                return `wooden_slab ["top_slot_bit"=true,"wood_type"="acacia"]`;
+
+            case DARK_OAK_WOOD_SLAB:
+                return `wooden_slab ["top_slot_bit"=true,"wood_type"="dark_oak"]`;
+
+            case DOUBLE_RED_SANDSTONE_SLAB:
+            case RED_SANDSTONE_SLAB:
+                return `stone_block_slab2 ["top_slot_bit"=true,"stone_slab_type_2"="red_sandstone"]`;
+
+            case PURPUR_SLAB:
+                return `stone_block_slab2 ["top_slot_bit"=true,"stone_slab_type_2"="purpur"]`;
+
+            case PRISMARINE_SLAB:
+                return `stone_block_slab2 ["top_slot_bit"=true,"stone_slab_type_2"="prismarine_rough"]`;
+
+            case DARK_PRISMARINE_SLAB:
+                return `stone_block_slab2 ["top_slot_bit"=true,"stone_slab_type_2"="prismarine_dark"]`;
+
+            case PRISMARINE_BRICK_SLAB:
+                return `stone_block_slab2 ["top_slot_bit"=true,"stone_slab_type_2"="prismarine_brick"]`;
+
+            case CRIMSON_SLAB:
+                return `crimson_slab ["top_slot_bit"=true]`;
+
+            case WARPED_SLAB:
+                return `warped_slab ["top_slot_bit"=true]`;
+
+            case BLACKSTONE_SLAB:
+                return `blockstone_slab ["top_slot_bit"=true]`;
+
+            case MANGROVE_SLAB:
+                return `mangrove_slab ["top_slot_bit"=true]`;
+
+            case BAMBOO_SLAB:
+                return `bamboo_slab ["top_slot_bit"=true]`;
+
+            case CHERRY_SLAB:
+                return `cherry_slab ["top_slot_bit"=true]`;
+        }
+
+        return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="smooth_stone"]`;
+    }
 }
