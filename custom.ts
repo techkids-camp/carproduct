@@ -170,12 +170,12 @@ namespace custom {
      * @param value describe value here, eg: 5
      */
     //% blockID=makeCircle
-    //% block="しゃたい(下)をつくる"
-    export function makeBottomBody() {
+    //% block="しゃたい(下)を $myBlock でつくる"
+    export function makeBottomBody(myBlock: halfBlocks) {
         resetArray();
         agentTp();
         agent.setSlot(1)
-        buildingCarBottom();
+        buildingCarBottom(myBlock);
 
         checkList.push(1);
 
@@ -267,7 +267,7 @@ namespace custom {
         answerCheck();
     }
 
-    function buildingCarBottom() {
+    function buildingCarBottom(value: number) {
         const agentDirection = agent.getOrientation();
         const agentDirectionXYZ = CarUtil.getAgentDirection();
 
@@ -294,19 +294,19 @@ namespace custom {
 
         player.execute(`structure load car_bottom ${agentDirectionXYZ.x} ${agentDirectionXYZ.y} ${agentDirectionXYZ.z} ${structureDirection}_degrees`);
 
-        // const carCoord = CarUtil.getCarCoord(1);
+        const carCoord = CarUtil.getCarCoord(1);
 
-        // const commandHalfBlock = CarUtil.getCommandHalfBlock(value);
+        const commandHalfBlock = CarUtil.getCommandHalfBlock(value);
 
-        // const startX = carCoord.startPos.x;
-        // const startY = carCoord.startPos.y;
-        // const startZ = carCoord.startPos.z;
+        const startX = carCoord.startPos.x;
+        const startY = carCoord.startPos.y;
+        const startZ = carCoord.startPos.z;
 
-        // const endX = carCoord.endPos.x;
-        // const endY = carCoord.endPos.y;
-        // const endZ = carCoord.endPos.z;
+        const endX = carCoord.endPos.x;
+        const endY = carCoord.endPos.y;
+        const endZ = carCoord.endPos.z;
 
-        // player.execute(`fill ${startX} ${startY} ${startZ} ${endX} ${endY} ${endZ} ${commandHalfBlock} replace stone_block_slab`);
+        player.execute(`fill ${startX} ${startY} ${startZ} ${endX} ${endY} ${endZ} ${commandHalfBlock} replace stone_block_slab`);
     }
 
     function buildingCarBody(value: number) {
@@ -461,82 +461,82 @@ class CarUtil{
         switch(block){
             case DOUBLE_STONE_SLAB:
             case SMOOTH_STONE_SLAB:
-                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="smooth_stone"]`;
+                return `stone_block_slab 8`;
             case STONE_SLAB:
-                return `stone_block_slab4 ["top_slot_bit"=true,"stone_slab_type_4"="stone"]`;
+                return `stone_block_slab4 10`;
 
             case SANDSTONE_SLAB:
-                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="sandstone"]`;
+                return `stone_block_slab 9`;
 
             case COBBLESTONE_SLAB:
-                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="cobblestone"]`;
+                return `stone_block_slab 11`;
 
             case BRICKS_SLAB:
-                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="brick"]`;
+                return `stone_block_slab 12`;
 
             case STONE_BRICKS_SLAB:
-                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="stone_brick"]`;
+                return `stone_block_slab 13`;
 
             case QUARTZ_SLAB:
-                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="quartz"]`;
+                return `stone_block_slab 14`;
 
             case NETHER_BRICK_SLAB:
-                return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="nether_brick"]`;
+                return `stone_block_slab 15`;
 
             case DOUBLE_WOODEN_SLAB:
             case OAK_WOOD_SLAB:
-                return `wooden_slab ["top_slot_bit"=true,"wood_type"="oak"]`;
+                return `wooden_slab 8`;
 
             case SPRUCE_WOOD_SLAB:
-                return `wooden_slab ["top_slot_bit"=true,"wood_type"="spruce"]`;
+                return `wooden_slab 9`;
 
             case BIRCH_WOOD_SLAB:
-                return `wooden_slab ["top_slot_bit"=true,"wood_type"="birch"]`;
+                return `wooden_slab 10`;
 
             case JUNGLE_WOOD_SLAB:
-                return `wooden_slab ["top_slot_bit"=true,"wood_type"="jungle"]`;
+                return `wooden_slab 11`;
 
             case ACACIA_WOOD_SLAB:
-                return `wooden_slab ["top_slot_bit"=true,"wood_type"="acacia"]`;
+                return `wooden_slab 12`;
 
             case DARK_OAK_WOOD_SLAB:
-                return `wooden_slab ["top_slot_bit"=true,"wood_type"="dark_oak"]`;
+                return `wooden_slab 13`;
 
             case DOUBLE_RED_SANDSTONE_SLAB:
             case RED_SANDSTONE_SLAB:
-                return `stone_block_slab2 ["top_slot_bit"=true,"stone_slab_type_2"="red_sandstone"]`;
+                return `stone_block_slab2 8`;
 
             case PURPUR_SLAB:
-                return `stone_block_slab2 ["top_slot_bit"=true,"stone_slab_type_2"="purpur"]`;
+                return `stone_block_slab2 9`;
 
             case PRISMARINE_SLAB:
-                return `stone_block_slab2 ["top_slot_bit"=true,"stone_slab_type_2"="prismarine_rough"]`;
+                return `stone_block_slab2 10`;
 
             case DARK_PRISMARINE_SLAB:
-                return `stone_block_slab2 ["top_slot_bit"=true,"stone_slab_type_2"="prismarine_dark"]`;
+                return `stone_block_slab2 11`;
 
             case PRISMARINE_BRICK_SLAB:
-                return `stone_block_slab2 ["top_slot_bit"=true,"stone_slab_type_2"="prismarine_brick"]`;
+                return `stone_block_slab2 12`;
 
             case CRIMSON_SLAB:
-                return `crimson_slab ["top_slot_bit"=true]`;
+                return `crimson_slab 1`;
 
             case WARPED_SLAB:
-                return `warped_slab ["top_slot_bit"=true]`;
+                return `warped_slab 1`;
 
             case BLACKSTONE_SLAB:
-                return `blockstone_slab ["top_slot_bit"=true]`;
+                return `blockstone_slab 1`;
 
             case MANGROVE_SLAB:
-                return `mangrove_slab ["top_slot_bit"=true]`;
+                return `mangrove_slab 1`;
 
             case BAMBOO_SLAB:
-                return `bamboo_slab ["top_slot_bit"=true]`;
+                return `bamboo_slab 1`;
 
             case CHERRY_SLAB:
-                return `cherry_slab ["top_slot_bit"=true]`;
+                return `cherry_slab 1`;
         }
 
-        return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="smooth_stone"]`;
+        return `stone_block_slab 9`;
     }
 }
