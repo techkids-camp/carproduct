@@ -9,7 +9,7 @@ declare const enum halfBlocks {
     //% jres=Block.StoneSlab
     SMOOTH_STONE = 43,
     //% block="いし"
-    //% jres=Block.StoneSlab
+    //% jres=Stone.StoneSlab
     STONE = 131978,
     //% block="さがん"
     //% jres=Block.SandstoneSlab
