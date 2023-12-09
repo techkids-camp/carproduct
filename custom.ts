@@ -268,31 +268,9 @@ namespace custom {
     }
 
     function buildingCarBottom(value: number) {
-        const agentDirection = agent.getOrientation();
-        const agentDirectionXYZ = CarUtil.getAgentDirection();
+        const { structurePos, structureDirection } = CarUtil.getWillLoadStructureData();
 
-        let structureDirection = 0;
-        // -180と-90は左寄り
-        switch(agentDirection){
-            case -180:
-                agentDirectionXYZ.z -= 9;
-                structureDirection = 90;
-                break;
-            case -90:
-                agentDirectionXYZ.x += 1;
-                structureDirection = 180;
-                break
-            case 90:
-                agentDirectionXYZ.x -= 9;
-                structureDirection = 0;
-                break;
-            case 0:
-                agentDirectionXYZ.z += 1;
-                structureDirection = 270;
-                break;
-        }
-
-        player.execute(`structure load car_bottom ${agentDirectionXYZ.x} ${agentDirectionXYZ.y} ${agentDirectionXYZ.z} ${structureDirection}_degrees`);
+        player.execute(`structure load car_bottom ${structurePos.x} ${structurePos.y} ${structurePos.z} ${structureDirection}_degrees`);
 
         const carCoord = CarUtil.getCarCoord(1);
 
@@ -310,7 +288,11 @@ namespace custom {
     }
 
     function buildingCarBody(value: number) {
+        agent.move(UP, 1);
+        agent.move(BACK, 1);
+        const { structurePos, structureDirection } = CarUtil.getWillLoadStructureData();
 
+        player.execute(`structure load car_middle ${structurePos.x} ${structurePos.y} ${structurePos.z} ${structureDirection}_degrees`);
     }
 
     function buildingCarUp(value: halfBlocks) {
@@ -388,9 +370,15 @@ type CoordRange = {
     endPos: Coord
 }
 
+type StructureData = {
+    structurePos: Coord,
+    structureDirection: number
+}
+
 class CarUtil{
     /**
      * プレイヤーの向いている方向を4方向で取得
+     * @returns 方向
      */
     public static getPlayerDirection(): CompassDirection{
         const orientation = player.getOrientation();
@@ -405,8 +393,9 @@ class CarUtil{
 
     /**
      * エージェントの向いている座標をx,y,zそれぞれで取得
+     * @returns xyz座標
      */
-    public static getAgentDirection(): Coord {
+    private static getAgentDirection(): Coord {
         const agentDirection = agent.getPosition()
         const agentDirectionString = agentDirection.toString().split(" ");
         const agentDirectionXYZ = agentDirectionString.map(dir => {
@@ -450,6 +439,38 @@ class CarUtil{
             startPos: startPos,
             endPos: endPos
         };
+    }
+
+    /**
+     * ストラクチャーを設置するための座標、向きを返す
+     * @returns ストラクチャーの情報
+     */
+    public static getWillLoadStructureData(): StructureData{
+        const agentDirection = agent.getOrientation();
+        const agentDirectionXYZ = this.getAgentDirection();
+
+        let structureDirection = 0;
+        // -180と-90は左寄り
+        switch (agentDirection) {
+            case -180:
+                agentDirectionXYZ.z -= 9;
+                structureDirection = 270;
+                break;
+            case -90:
+                agentDirectionXYZ.x += 1;
+                structureDirection = 0;
+                break
+            case 90:
+                agentDirectionXYZ.x -= 9;
+                structureDirection = 180;
+                break;
+            case 0:
+                agentDirectionXYZ.z += 1;
+                structureDirection = 90;
+                break;
+        }
+
+        return {structurePos: agentDirectionXYZ, structureDirection: structureDirection};
     }
 
     /**
