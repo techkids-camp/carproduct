@@ -290,7 +290,7 @@ namespace custom {
     function buildingCarBody(value: number) {
         agent.move(UP, 1);
         agent.move(BACK, 1);
-        const { structurePos, structureDirection } = CarUtil.getWillLoadStructureData();
+        const { structurePos, structureDirection } = CarUtil.getWillLoadStructureData(true);
 
         player.execute(`structure load car_middle ${structurePos.x} ${structurePos.y} ${structurePos.z} ${structureDirection}_degrees`);
 
@@ -337,18 +337,66 @@ namespace custom {
     }
 
     function buildingCarGlass() {
-        agent.setItem(GLASS, 64, 1)
+        agent.setItem(GLASS, 64, 1);
 
+        const agentDirection = agent.getOrientation();
+
+        let structureDirection = 0;
+        // 初期位置の統合
+        if(agentDirection === -180 || agentDirection === -90) agent.move(RIGHT, 3);
+
+        agent.move(DOWN, 1);
+        agent.move(FORWARD, 2);
+        agent.move(LEFT, 1);
+        agent.place(FORWARD);
+        agent.move(LEFT, 1);
+        agent.place(FORWARD);
+        agent.move(LEFT, 2);
+        agent.move(FORWARD, 6);
+        agent.place(RIGHT);
+        agent.move(FORWARD, 2);
+        agent.move(RIGHT, 2);
+        agent.place(BACK);
+        agent.move(RIGHT, 1);
+        agent.place(BACK);
+        agent.move(RIGHT, 2);
+        agent.move(BACK, 2);
+        agent.place(LEFT);
     }
 
     function buildingCarWheel() {
-        agent.setItem(BLACK_CONCRETE, 64, 1)
+        agent.setItem(BLACK_CONCRETE, 64, 1);
 
+        agent.setItem(BLACK_WOOL, 1, 1);
+        agent.move(DOWN, 2);
+        agent.place(LEFT);
+        agent.move(BACK, 6);
+        agent.place(LEFT);
+        agent.move(UP, 2);
+        agent.move(LEFT, 5);
+        agent.move(DOWN, 2);
+        agent.place(RIGHT);
+        agent.move(FORWARD, 6);
+        agent.place(RIGHT);
     }
 
     function buildingCarDoor() {
-        agent.setItem(IRON_DOOR, 64, 1)
+        agent.setItem(IRON_DOOR, 64, 1);
 
+        agent.turn(RIGHT_TURN);
+        agent.move(RIGHT, 2);
+        agent.move(UP, 1);
+        agent.place(FORWARD);
+        agent.move(RIGHT, 2);
+        agent.place(FORWARD);
+        agent.move(UP, 3);
+        agent.move(FORWARD, 5);
+        agent.move(DOWN, 3);
+        agent.turn(RIGHT_TURN);
+        agent.turn(RIGHT_TURN);
+        agent.place(FORWARD);
+        agent.move(RIGHT, 2);
+        agent.place(FORWARD);
     }
 
     function answerCheck() {
@@ -482,7 +530,7 @@ class CarUtil{
      * ストラクチャーを設置するための座標、向きを返す
      * @returns ストラクチャーの情報
      */
-    public static getWillLoadStructureData(): StructureData{
+    public static getWillLoadStructureData(isMiddle = false): StructureData{
         const agentDirection = agent.getOrientation();
         const agentDirectionXYZ = this.getAgentDirection();
 
@@ -490,15 +538,17 @@ class CarUtil{
         // -180と-90は左寄り
         switch (agentDirection) {
             case -180:
-                agentDirectionXYZ.z -= 9;
+                if (isMiddle) agentDirectionXYZ.z -= 11;
+                else agentDirectionXYZ.z -= 9;
                 structureDirection = 270;
                 break;
             case -90:
                 agentDirectionXYZ.x += 1;
                 structureDirection = 0;
-                break
+                break;
             case 90:
-                agentDirectionXYZ.x -= 9;
+                if(isMiddle) agentDirectionXYZ.x -= 11;
+                else agentDirectionXYZ.x -= 9;
                 structureDirection = 180;
                 break;
             case 0:
