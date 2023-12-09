@@ -4,50 +4,72 @@
 * 詳しくはこちらを参照してください：https://minecraft.makecode.com/blocks/custom
 */
 
-enum halfBlocks {
+declare const enum halfBlocks {
     //% block="なめらかないし"
+    //% jres=Block.StoneSlab
     SMOOTH_STONE = 43,
     //% block="いし"
+    //% jres=Block.StoneSlab
     STONE = 131978,
     //% block="さがん"
+    //% jres=Block.SandstoneSlab
     SAND_STONE = 65580,
     //% block="あかいさがん"
+    //% jres=Block.RedSandstoneSlab
     RED_SAND_STONE = 182,
     //% block="まるいし"
+    //% jres=Block.CobblestoneSlab
     COLLABLE_STONE = 196652,
     //% block="レンガ"
+    //% jres=Block.BricksSlab
     BRICK = 262188,
     //% block="いしのレンガ"
+    //% jres=Block.StoneBricksSlab
     STONE_BRICK = 327724,
     //% block="クオーツ"
+    //% jres=Block.QuartzSlab
     QUARTZ = 393260,
     //% block="ネザーレンガ"
+    //% jres=Block.NetherBrickSlab
     NETHER_BRICK = 458796,
     //% block="オークの木"
+    //% jres=Block.OakWoodSlab
     OAK = 158,
     //% block="トウヒの木"
+    //% jres=Block.SpruceWoodSlab
     SPRUCE = 65694,
     //% block="しらかばの木"
+    //% jres=Block.BirchWoodSlab
     BIRCH = 131230,
     //% block="ジャングルの木"
+    //% jres=Block.JungleWoodSlab
     JUNGLE = 196766,
     //% block="アカシアの木"
+    //% jres=Block.AcaciaWoodSlab
     ACACIA = 262302,
     //% block="ダークオークの木"
+    //% jres=Block.DarkOakWoodSlab
     DARK_OAK = 327838,
     //% block="マングローブの木"
+    //% jres=Block.MangroveSlab
     MANGROVE = 839,
     //% block="さくらの木"
+    //% jres=Block.CherrySlab
     CHERRY = 928,
     //% block="たけの木"
+    //% jres=Block.BambooSlab
     BAMBOO = 916,
     //% block="プルパァ"
+    //% jres=Block.PurpurSlab
     PURPUR = 65718,
     //% block="プリズマリン"
+    //% jres=Block.PrismarineSlab
     PRISMARINE = 131254,
     //% block="ダークプリズマリン"
+    //% jres=Block.DarkPrismarineSlab
     DARK_PRISMARINE = 196790,
     //% block="プリズマリンのレンガ"
+    //% jres=Block.PrismarineBrickSlab
     PRISMARINE_BRICK = 262326
 }
 
