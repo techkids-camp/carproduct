@@ -9,8 +9,20 @@ enum halfBlocks {
     SMOOTH_STONE = 43,
     //% block="いし"
     STONE = 131978,
+    //% block="さがん"
+    SAND_STONE = 65580,
+    //% block="あかいさがん"
+    RED_SAND_STONE = 182,
     //% block="まるいし"
     COLLABLE_STONE = 196652,
+    //% block="レンガ"
+    BRICK = 262188,
+    //% block="いしのレンガ"
+    STONE_BRICK = 327724,
+    //% block="クオーツ"
+    QUARTZ = 393260,
+    //% block="ネザーレンガ"
+    NETHER_BRICK = 458796,
     //% block="オークの木"
     OAK = 158,
     //% block="トウヒの木"
@@ -28,7 +40,15 @@ enum halfBlocks {
     //% block="さくらの木"
     CHERRY = 928,
     //% block="たけの木"
-    BAMBOO = 912
+    BAMBOO = 916,
+    //% block="プルパァ"
+    PURPUR = 65718,
+    //% block="プリズマリン"
+    PRISMARINE = 131254,
+    //% block="ダークプリズマリン"
+    DARK_PRISMARINE = 196790,
+    //% block="プリズマリンのレンガ"
+    PRISMARINE_BRICK = 262326
 }
 
 //% color=#696969 weight=400 icon="\uf018" block=みちをつくる
@@ -150,13 +170,12 @@ namespace custom {
      * @param value describe value here, eg: 5
      */
     //% blockID=makeCircle
-    //% block="しゃたい(下)を $myBlock でつくる"
-    export function makeBottomBody(myBlock: halfBlocks) {
+    //% block="しゃたい(下)をつくる"
+    export function makeBottomBody() {
         resetArray();
         agentTp();
         agent.setSlot(1)
-        agent.setItem(myBlock, 64, 1);
-        buildingCarBottom(myBlock);
+        buildingCarBottom();
 
         checkList.push(1);
 
@@ -248,7 +267,7 @@ namespace custom {
         answerCheck();
     }
 
-    function buildingCarBottom(value: number) {
+    function buildingCarBottom() {
         const agentDirection = agent.getOrientation();
         const agentDirectionXYZ = CarUtil.getAgentDirection();
 
@@ -275,8 +294,19 @@ namespace custom {
 
         player.execute(`structure load car_bottom ${agentDirectionXYZ.x} ${agentDirectionXYZ.y} ${agentDirectionXYZ.z} ${structureDirection}_degrees`);
 
-        const carCoord = CarUtil.getCarCoord(1);
+        // const carCoord = CarUtil.getCarCoord(1);
 
+        // const commandHalfBlock = CarUtil.getCommandHalfBlock(value);
+
+        // const startX = carCoord.startPos.x;
+        // const startY = carCoord.startPos.y;
+        // const startZ = carCoord.startPos.z;
+
+        // const endX = carCoord.endPos.x;
+        // const endY = carCoord.endPos.y;
+        // const endZ = carCoord.endPos.z;
+
+        // player.execute(`fill ${startX} ${startY} ${startZ} ${endX} ${endY} ${endZ} ${commandHalfBlock} replace stone_block_slab`);
     }
 
     function buildingCarBody(value: number) {
@@ -428,13 +458,12 @@ class CarUtil{
      * @returns コマンド使われるそのブロックの文字列
      */
     public static getCommandHalfBlock(block: Block): string {
-
-
         switch(block){
             case DOUBLE_STONE_SLAB:
             case SMOOTH_STONE_SLAB:
-            case STONE_SLAB:
                 return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="smooth_stone"]`;
+            case STONE_SLAB:
+                return `stone_block_slab4 ["top_slot_bit"=true,"stone_slab_type_4"="stone"]`;
 
             case SANDSTONE_SLAB:
                 return `stone_block_slab ["top_slot_bit"=true,"stone_slab_type"="sandstone"]`;
