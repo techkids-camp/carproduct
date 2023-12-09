@@ -314,7 +314,26 @@ namespace custom {
     }
 
     function buildingCarUp(value: halfBlocks) {
+        agent.move(UP, 2);
+        const { structurePos, structureDirection } = CarUtil.getWillLoadStructureData();
 
+        player.execute(`structure load car_up ${structurePos.x} ${structurePos.y} ${structurePos.z} ${structureDirection}_degrees`);
+
+        const carCoord = CarUtil.getCarCoord(1);
+
+        const startX = carCoord.startPos.x;
+        const startY = carCoord.startPos.y;
+        const startZ = carCoord.startPos.z;
+
+        const endX = carCoord.endPos.x;
+        const endY = carCoord.endPos.y;
+        const endZ = carCoord.endPos.z;
+        blocks.replace(
+            value,
+            SMOOTH_STONE_SLAB,
+            world(startX, startY, startZ),
+            world(endX, endY, endZ)
+        );
     }
 
     function buildingCarGlass() {
